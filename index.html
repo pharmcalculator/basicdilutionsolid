@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Dilutions Calculator</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: inline-block;
+            text-align: left;
+            font-size: 20px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+            font-size: 16px;
+        }
+
+        button[type="button"] {
+            background-color: green;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        button[type="reset"] {
+            background-color: red;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        #results {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #results p {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basic Dilutions Calculator</h1>
+    <form>
+        <label for="initial-amount">Initial amount of solid ingredient (in grams):</label>
+        <input type="number" id="initial-amount" name="initial-amount">
+        <br>
+        <label for="total-weight">Total weight of product (in grams):</label>
+        <input type="number" id="total-weight" name="total-weight">
+        <br>
+        <label for="additional-weight">Additional weight of vehicle (in grams):</label>
+        <input type="number" id="additional-weight" name="additional-weight">
+        <br>
+        <button type="button" onclick="calculateDilution()">Calculate</button>
+        <button type="reset">Reset</button>
+    </form>
+    <br>
+    <div id="results"></div>
+
+    <script>
+        function calculateDilution() {
+            var initialAmount = parseFloat(document.getElementById('initial-amount').value);
+            var totalWeight = parseFloat(document.getElementById('total-weight').value);
+            var additionalWeight = parseFloat(document.getElementById('additional-weight').value);
+
+            var finalWeight = totalWeight + additionalWeight;
+            var amountInMixture = initialAmount;
+
+            var percentageStrength = (amountInMixture / finalWeight) * 100;
+            var ratioStrength = "1 : " + (finalWeight / amountInMixture).toFixed(0);
+            var amountStrength = (amountInMixture / finalWeight) * 1000;
+
+            var results = document.getElementById('results');
+            results.innerHTML = "<h2>Results:</h2>" +
+                "<p>Percentage Strength: " + percentageStrength.toFixed(4) + "%</p>" +
+                "<p>Ratio Strength: " + ratioStrength + "</p>" +
+                "<p>Amount Strength: " + amountStrength.toFixed(4) + " mg/g</p>";
+        }
+    </script>
+</body>
+</html>
